@@ -1,0 +1,197 @@
+@charset "UTF-8";
+/*共通*/
+.auto-right{
+	float:right;
+}
+.auto-left{
+	float:left;
+}
+
+ul{
+	list-style: none;
+    padding: 0;
+}
+.ml10{
+	margin-left: 10%;
+}
+.ml25{
+	margin-left: 25px;
+}
+.mt10{
+	margin-top: 10px;
+}
+/*共通パーツ*/
+.logout_button{
+	width:100px;
+	height: 30px;
+}
+
+.input_area{
+	width: 100%;
+	margin: 10px 0;
+}
+
+.input_label{
+	display: inline-block;
+	text-align: right;
+	width: 35px;
+}
+
+input{
+	width: 90%;
+	height:30px;
+}
+
+.submit{
+	padding: 5px 25px;
+}
+
+.center_auto{
+	display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.label_textarea{
+	width: 90%;
+    height: 60px;
+    border: 1px solid #000000;
+    background-color: #ededed;
+}
+
+.label_long{
+	width: 90%;
+	height: 30px;
+    border: 1px solid #000000;
+    background-color: #ededed;
+}
+
+.border{
+	border: 2px solid #ccc;
+    padding: 10px;
+}
+
+/*各ページ*/
+.login_area{
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+    width: 500px;
+    margin: auto;
+    height: 500px;
+    justify-content: center;
+}
+
+.global_area{
+	max-width: 700px;
+	margin: auto;
+}
+
+.main_area{
+	width:100%;
+}
+
+/*Top*/
+.top_area{
+	display: flex;
+	flex-flow: column;
+	align-items: flex-end;
+    justify-content: center;
+}
+
+.top_box{
+    display: flex;
+    justify-content: space-between;
+    width: 215px;
+}
+
+.saiten_box{
+	display: flex;
+}
+
+.top_button{
+	width:500px;
+	height:50px;
+	margin: 10px 0;
+}
+
+/*Main*/
+.list_area{
+	display:flex;
+	justify-content: space-between;
+}
+.toi_number{
+	display: inline-block;
+	width:25px;
+	background-color: #ededed;
+	border:1px solid #000000;
+	text-align: center;
+}
+
+.edit_area{
+	display:flex;
+	margin: 10px 0;
+}
+
+/*delete_confirm*/
+.edit_area_answer{
+	width:100%;
+}
+
+.edit_area_answer .label_long{
+	width:100%;
+}
+
+.list_label{
+	display: inline-block;
+	width:520px;
+	background-color: #ededed;
+	border:1px solid #000000;
+	text-align: center;
+}
+
+.flex_start{
+	justify-content: start;
+}
+
+.flex_end{
+	justify-content: flex-end;
+}
+
+.space_between{
+	justify-content: space-between;
+}
+
+.space_between .label_textarea {
+		width: 94%;
+}
+.align_center{
+	align-items: center;
+}
+/*result*/
+.result_title_area{
+	display: flex;
+    width: 100%;
+}
+.result_title{
+	display: flex;
+    justify-content: center;
+    width: 70%;
+}
+
+/*historu*/
+.history_table{
+	width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.history_table td{
+	width: 30%;
+	border: 1px solid #cccccc;
+}
+
+/*優先度高めクラス*/
+.close_area{
+	display:none;
+}
