@@ -17,6 +17,8 @@
 <!-- テキストエリアのデータをリクエスト -->
 <% String TextAreaEdit = (String)request.getAttribute("textAreaEdit"); %>
 <% String[] AnswerList = (String[])request.getAttribute("answerList"); %>
+
+<input type="hidden" class="questionId" value="<%= EditId %>">
 	<div class="global_area">
 		<div class="top_area">
 			<div class="top_box">
