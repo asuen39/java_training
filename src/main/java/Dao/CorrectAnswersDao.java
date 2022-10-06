@@ -201,6 +201,43 @@ public class CorrectAnswersDao extends ConnectionDao {
 		}
 	}
 	
+
+	/**
+	 * 指定IDのレコードを更新する
+	 */
+	public void updateAnswer(int edit_id, String answer1) throws Exception {
+		if (con == null) {
+			setConnection();
+		}
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			String sql = "UPDATE correct_answers SET answer = ? where questions_id = ?";
+
+			/** PreparedStatement オブジェクトの取得**/
+			st = con.prepareStatement(sql);
+			st.setString(1, answer1);
+			st.setInt(2, edit_id);
+			st.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("レコードの取得に失敗しました");
+		} finally {
+			try {
+				if (rs != null) {
+						rs.close();
+				}				
+				if (st != null) {
+						st.close();
+				}
+				close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new Exception("リソースの開放に失敗しました");
+			}
+		}
+	}
+	
 	/**
 	 * 指定のレコード登録する
 	 */

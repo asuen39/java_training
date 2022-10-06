@@ -56,7 +56,7 @@ public class Confirm extends HttpServlet {
 		for (String checkAnswer : answer_update) {
 			if(checkAnswer.length() < 200) {
 				//nullや空文字の影響の為java側で処理をせずパラメータとして設置する。jspで読む込む処理を設置する。
-				request.setAttribute("answerList", answer_update);
+				request.setAttribute("answerListUpdate", answer_update);
 			} else {
 				inputerror = "answer_update_error";
 				//入力画面へ遷移	    		   

@@ -139,6 +139,42 @@ public class QuestionsDao extends ConnectionDao {
 	}
 	
 	/**
+	 * 指定IDのレコードを更新する
+	 */
+	public void update(int edit_id, String textarea_edit) throws Exception {
+		if (con == null) {
+			setConnection();
+		}
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			String sql = "UPDATE questions SET question = ? where id = ?";
+
+			/** PreparedStatement オブジェクトの取得**/
+			st = con.prepareStatement(sql);
+			st.setString(1, textarea_edit);
+			st.setInt(2, edit_id);
+			st.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("レコードの取得に失敗しました");
+		} finally {
+			try {
+				if (rs != null) {
+						rs.close();
+				}				
+				if (st != null) {
+						st.close();
+				}
+				close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new Exception("リソースの開放に失敗しました");
+			}
+		}
+	}
+	
+	/**
 	 * 指定のレコード登録する
 	 */
 	public void entry(String textarea_edit) throws Exception {
