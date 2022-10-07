@@ -51,6 +51,7 @@
 										<li class="edit_area">
 											<input type="text" name="answer_update" style="width: 92%;" value="<%= ul_answerBean.getAnswer() %>">
 											<button type="button" onclick="delete_btn(this)">削除</button>
+											<input type="hidden" name="answer_update_id" value="<%= ul_answerBean.getId() %>">
 										</li>
 									<% } %>
 									</ul>

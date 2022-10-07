@@ -16,6 +16,7 @@
 <% String EditId = (String)request.getAttribute("editId"); %>
 <!-- テキストエリアのデータをリクエスト -->
 <% String TextAreaUpdate = (String)request.getAttribute("textAreaUpdate"); %>
+<% String[] AnswerUpdateId = (String[])request.getAttribute("answerUpdateId"); %>
 <% String[] AnswerListUpdate = (String[])request.getAttribute("answerListUpdate"); %>
 
 <input type="hidden" class="questionId" value="<%= EditId %>">
@@ -44,6 +45,13 @@
 								      <% if (AnswerListUpdate[i] != null && !"".equals(AnswerListUpdate[i])) { %>
 								         <li class="edit_area flex_end edit_area_answer"><label class="label_long"><%= AnswerListUpdate[i] %></label></li>
 								         <input type="hidden" name="answer" value="<%= AnswerListUpdate[i] %>">
+								      <% } %>
+								    <% } %>
+								    
+								    <%for( int i = 0; i < AnswerUpdateId.length; i++){ %>
+										<!-- nullや空文字の処理 -->
+								      <% if (AnswerUpdateId[i] != null && !"".equals(AnswerUpdateId[i])) { %>
+								         <input type="hidden" name="answer_Id" value="<%= AnswerUpdateId[i] %>">
 								      <% } %>
 								    <% } %>
 									</ul>

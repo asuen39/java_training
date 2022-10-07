@@ -201,23 +201,97 @@ public class CorrectAnswersDao extends ConnectionDao {
 		}
 	}
 	
+	
+	/**
+	 * 指定のレコード登録する
+	 */
+	public int entryAnswer(int questions_id, String answer1) throws Exception {
+		if (con == null) {
+			setConnection();
+		}
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "INSERT INTO correct_answers (questions_id, answer, created_at, updated_at) values (?, ?, current_timestamp(),current_timestamp())";
 
+			/** PreparedStatement オブジェクトの取得**/
+			st = con.prepareStatement(sql);
+			st.setInt(1, questions_id);
+			st.setString(2, answer1);
+			int result = st.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("レコードの取得に失敗しました");
+		} finally {
+			try {
+				if (rs != null) {
+						rs.close();
+				}				
+				if (st != null) {
+						st.close();
+				}
+				close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new Exception("リソースの開放に失敗しました");
+			}
+		}
+	}
+	
 	/**
 	 * 指定IDのレコードを更新する
 	 */
-	public void updateAnswer(int edit_id, String answer1) throws Exception {
+	public void updateAnswer(int Answer_Id, String answerText) throws Exception {
 		if (con == null) {
 			setConnection();
 		}
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			String sql = "UPDATE correct_answers SET answer = ? where questions_id = ?";
+			String sql = "UPDATE correct_answers SET answer = ? where id = ?";
 
 			/** PreparedStatement オブジェクトの取得**/
 			st = con.prepareStatement(sql);
-			st.setString(1, answer1);
-			st.setInt(2, edit_id);
+			st.setString(1, answerText);
+			st.setInt(2, Answer_Id);
+			st.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("レコードの取得に失敗しました");
+		} finally {
+			try {
+				if (rs != null) {
+						rs.close();
+				}				
+				if (st != null) {
+						st.close();
+				}
+				close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new Exception("リソースの開放に失敗しました");
+			}
+		}
+	}
+
+	/**
+	 * 指定IDのレコードを追加する
+	 */
+	public void insertAnswer(int edit_id, String answer1) throws Exception {
+		if (con == null) {
+			setConnection();
+		}
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			String sql = "INSERT INTO correct_answers (questions_id, answer) values(?, ?)";
+
+			/** PreparedStatement オブジェクトの取得**/
+			st = con.prepareStatement(sql);
+			st.setInt(1, edit_id);
+			st.setString(2, answer1);
 			st.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -239,24 +313,21 @@ public class CorrectAnswersDao extends ConnectionDao {
 	}
 	
 	/**
-	 * 指定のレコード登録する
+	 * 指定IDのレコードを削除する
 	 */
-	public int entryAnswer(int questions_id, String answer1) throws Exception {
+	public void deleteIdAnswer(String AnswerId) throws Exception {
 		if (con == null) {
 			setConnection();
 		}
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		
 		try {
-			String sql = "INSERT INTO correct_answers (questions_id, answer, created_at, updated_at) values (?, ?, current_timestamp(),current_timestamp())";
+			String sql = "DELETE FROM correct_answers WHERE id = ?";
 
 			/** PreparedStatement オブジェクトの取得**/
 			st = con.prepareStatement(sql);
-			st.setInt(1, questions_id);
-			st.setString(2, answer1);
-			int result = st.executeUpdate();
-			return result;
+			st.setString(1, AnswerId);
+			st.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("レコードの取得に失敗しました");

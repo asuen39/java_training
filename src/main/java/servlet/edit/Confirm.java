@@ -34,10 +34,14 @@ public class Confirm extends HttpServlet {
 	    // edit/edit.jspからのform値を取得
 	    String edit_id = request.getParameter("edit_id");
 	    String textarea_update = request.getParameter("textarea_update");
+	    String[] answer_update_id = request.getParameterValues("answer_update_id");
 		String[] answer_update = request.getParameterValues("answer_update");
 		
 		//問題番号のidを設置する。
 		request.setAttribute("editId", edit_id);
+		
+		//答えのidを設置する。
+		request.setAttribute("answerUpdateId", answer_update_id);
 		
 		//文字数チェック テキストエリア
 		//エラーメッセージ
