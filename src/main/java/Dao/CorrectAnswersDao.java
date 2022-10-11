@@ -315,7 +315,7 @@ public class CorrectAnswersDao extends ConnectionDao {
 	/**
 	 * 指定IDのレコードを削除する
 	 */
-	public void deleteIdAnswer(String AnswerId) throws Exception {
+	public void deleteIdAnswer(int id) throws Exception {
 		if (con == null) {
 			setConnection();
 		}
@@ -326,7 +326,7 @@ public class CorrectAnswersDao extends ConnectionDao {
 
 			/** PreparedStatement オブジェクトの取得**/
 			st = con.prepareStatement(sql);
-			st.setString(1, AnswerId);
+			st.setInt(1, id);
 			st.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

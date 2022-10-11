@@ -70,6 +70,7 @@
 				<li class="edit_area addition_content">
 					<input type="text" name="answer_update" style="width: 92%;">
 					<button type="button" onclick="delete_btn(this)">削除</button>
+					<input type="hidden" name="answer_update_id" value="">
 				</li>
 			</ul>
 		</div>

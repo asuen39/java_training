@@ -42,7 +42,7 @@
 									<!-- 配列の処理 -->
 									<%for( int i = 0; i < AnswerListUpdate.length; i++){ %>
 										<!-- nullや空文字の処理 -->
-								      <% if (AnswerListUpdate[i] != null && !"".equals(AnswerListUpdate[i])) { %>
+								      <% if (AnswerListUpdate[i] != null) { %>
 								         <li class="edit_area flex_end edit_area_answer"><label class="label_long"><%= AnswerListUpdate[i] %></label></li>
 								         <input type="hidden" name="answer" value="<%= AnswerListUpdate[i] %>">
 								      <% } %>
@@ -50,7 +50,7 @@
 								    
 								    <%for( int i = 0; i < AnswerUpdateId.length; i++){ %>
 										<!-- nullや空文字の処理 -->
-								      <% if (AnswerUpdateId[i] != null && !"".equals(AnswerUpdateId[i])) { %>
+								      <% if (AnswerUpdateId[i] != null) { %>
 								         <input type="hidden" name="answer_Id" value="<%= AnswerUpdateId[i] %>">
 								      <% } %>
 								    <% } %>

@@ -40,11 +40,6 @@ public class Update extends HttpServlet {
   		String textarea_edit = request.getParameter("textarea_edit");
   		String[] answer_Id = request.getParameterValues("answer_Id");
   		String[] answer = request.getParameterValues("answer");
-  		
-  		//System.out.println(edit_id);
-  		//System.out.println(textarea_edit);
-  		//System.out.println(answer_Id);
-  		//System.out.println(answer);
   	    
   	    //formから値を取得 レコード登録	
   		try {
@@ -61,55 +56,52 @@ public class Update extends HttpServlet {
 	    	
 	    	//答えの追加・削除・更新
 	    	
-	    	//65行目 入力画面からの答え一覧のidをループさせて1件ずつ値を取り出す
-    		for (String Answer_Id : answer_Id) {
-	    	
-	    		//68行目は1件ずつ取り出された答え一覧のidをintとして変換する。
-	    		int AnswerId = Integer.parseInt(Answer_Id);
+	    	//flag変数を宣言
+	    	int i = 0;
+	    	//入力画面からの答え一覧のidをループさせる。
+    		for ( i = 0; i < answer_Id.length; i++) {
+    			
+    			//1つ取り出された答え一覧のidをnullか空文字か判定させる。
+    			if(answer_Id[i] == null || answer_Id[i].equals("")) {
+    				
+    				//nullか空文字があてはまる場合、問題番号のidと該当する答えを実行する
+    				//新規に追加する。
+    				dao_answer.insertAnswer(edit_id,  answer[i]);
+    				
+    			} else {
+    				
+    				//答え一覧のidが条件文に当てはまらない場合、入力画面の答えのidと答えの文字列を実行する。
+    				//更新する。
+    				dao_answer.updateAnswer(Integer.parseInt(answer_Id[i]),  answer[i]);
+    			}
 	    		
-	    		//データベースから取得してきたデータをループさせて1件ずつ値を取り出す
-	    		for(CorrectAnswersBean answerBean_number : answerBean) {
-	    			
-	    			//データベースから取り出した答え一覧のidと入力画面から送られてきたidと比較する
-	    			if(answerBean_number.getId() == AnswerId) {
-	    				
-	    				//入力画面から送られてきた答えと合致しているidを更新させたい ※答えとidを設定したいがどういう構文にしたらよいか不明
-	    				for (String Answer : answer) {
-	    					
-	    					//1件ずつループさせた答えをstringに入れる。
-	    		    		String answerText = Answer;
-	    		    		
-	    		    		//1件ずつとりだされたidと答えを更新する
-		    				dao_answer.updateAnswer(AnswerId,  answerText);
-	    		    	}
-	    			}
-	    		}
-	    		
-	    		//inputで追加された値が送られるくる。
-	    		//情報がないのでnullで入力画面から送られてくる
-//	    		if(AnswerId == null) {
-	    		
-//	    			//問題のquestion_idと新規の答えを登録させる
-//	    		}
 	    	}
     		
 	    	//削除処理 入力画面から送られてこなかったidがある場合、
     		//データベースから取得してきたデータをループさせて1件ずつ値を取り出す
 	    	for(CorrectAnswersBean answerBean_number : answerBean) {
 	    		
+	    		//flag変数を宣言
+	    		int flag = 0;
+	    		
 	    		//入力画面から送られてきたidを1件ずつとりだす
 	    		for (String Answer_Id : answer_Id) {
 	    			
 	    			//データベースの答え一覧のidと入力画面から送られてきたidを比較する
-//	    			if(answerBean_number.getId() == AnswerId) {
-	    			
-	    				//一致しないidがある場合はデータベースの答えを削除する
-//	    				//dao_answer.updateAnswer()
-//	    			}
+	    			if(answerBean_number.getId() == Integer.parseInt(Answer_Id) ) {
+	    				//条件文を通過する場合はflagに1を追加して返す。
+	    				flag++;
+	    				
+	    			}
 	    		}
+	    		
+	    		//上記の条件文でフラグが加算されず0で来た場合。
+	    		if( flag == 0) {
+	    			//0の時にループさせていた値のレコードを削除する。
+	    			dao_answer.deleteIdAnswer(answerBean_number.getId());
+	    		}
+	    		
     		}
-	    	
-	    	
 	    	
 	    	
 	    } catch (Exception e) {
