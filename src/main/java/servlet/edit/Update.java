@@ -66,6 +66,7 @@ public class Update extends HttpServlet {
     				
     				//nullか空文字があてはまる場合、問題番号のidと該当する答えを実行する
     				//新規に追加する。
+    				//※登録は出来るけどコンソールでエラー文が表示される。「For input string: ""」
     				dao_answer.insertAnswer(edit_id,  answer[i]);
     				
     			} else {

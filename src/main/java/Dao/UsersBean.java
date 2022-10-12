@@ -13,6 +13,7 @@ public class UsersBean {
 /**
  * コンストラクタ
  */
+	//UsersBeanを宣言する。外部ファイルからアクセス可能にする。
 	public UsersBean(int id, String name, String password) {
 		this.id = id;
 		this.name = name;
@@ -23,10 +24,11 @@ public class UsersBean {
 	public UsersBean() {
 
 	}
-
+	//テーブルからidを取得する。
 	public int getId() {
 		return this.id;
 	}
+	//idをセットする。
 	public void setId(int id) {
 		this.id = id;
 	} 
@@ -42,6 +44,7 @@ public class UsersBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	public Timestamp getCreatedAt() {
 		return this.created_at;
 	}

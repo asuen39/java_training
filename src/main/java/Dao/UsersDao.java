@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+//UsersDaoというクラスを定義する。
+//extendsをする事でConnectionDaoの要素を継承している。
 public class UsersDao extends ConnectionDao {
 	
 	/**
@@ -17,27 +19,64 @@ public class UsersDao extends ConnectionDao {
 	/**
 	 * users テーブルを全件取得
 	 */
+	//Daoとは? データベースの接続情報を持ち、データベースにアクセスしてデータの取得や操作を行える
+	//publicでアクセス可能にする。
+	
+	//findAllメソッドの戻り値の型はList<UsersBean>と定義する。
 	public List<UsersBean> findAll() throws Exception {
+		
+		//データベースに繋がっているか判定をだす。
 		if (con == null) {
+			//データベースに接続する。
 			setConnection();
 		}
+		
+		//PreparedStatementでstを定義する。
 		PreparedStatement st = null;
+		
+		//ResultSetでrsを定義する。
 		ResultSet rs = null;
+		
+		//例外処理のtry-catch文を使用する。
 		try {
+			//・変数sqlにsql文を格納する。
+			//1. usersテーブルからWHERE delete_flagが0の物を全件取得する。
+			//2. レコードの取得フィールドはid、name、password
+			//※. sql文内にwhere でdelete_flag = 0の条件文を設置する。
 			String sql = "SELECT id, name, password FROM users WHERE delete_flag = 0";
-			/** PreparedStatement オブジェクトの取得**/
+			
+			//stに情報を格納。
+			//1.con はデータベースの情報格納。
+			//2. データベースに情報を送る為にprepareStatementにsql文を格納する。
+			//※conとprepareStatementは連結ができる。
 			st = con.prepareStatement(sql);
-			/** SQL 実行 **/
+			
+			//rsに実行されたsql文を格納する。
+			//executeQueryで実行
 			rs = st.executeQuery();
-			/** select文の結果をArrayListに格納 **/
+			
+			// returnで返ってきたlistの結果を格納する。
+			// 1.listをインスタンス化する。
 			List<UsersBean> list = new ArrayList<UsersBean>();
+			
+			//実行されたsqlからレコードが抽出される。
+			//whileで繰り返しで表示する。nextは空白文字も含む
 			while (rs.next()) {
+				// idにレコードのidをセットする。
 				int id = rs.getInt("id");
+				
+				// nameにレコードのnameをセットする。
 				String name = rs.getString("name");
+				
+				// passにレコードのパスワードをセットする。
 				String pass = rs.getString("password");
+				
+				//beanにid,name,passを設置する。UsersBean beanで呼び出し可能にする。
 				UsersBean bean = new UsersBean(id, name, pass);
 				list.add(bean);
 			}
+			
+			//listクラスに処理結果返す。
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,6 +102,7 @@ public class UsersDao extends ConnectionDao {
 	/**
 	 * 指定IDのレコードを取得する
 	 */
+	//UsersBean findを宣言する。
 	public UsersBean find(int user_id) throws Exception {
 		if (con == null) {
 			setConnection();
@@ -70,20 +110,35 @@ public class UsersDao extends ConnectionDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
+			//sqlを実行する。指定のidをループさせてid、name、passwordを抽出させる
 			String sql = "SELECT id, name, password FROM users WHERE id = ?";
 			/** PreparedStatement オブジェクトの取得**/
 			st = con.prepareStatement(sql);
+			//sqlで1つ目の？にuser_idを代入する。
 			st.setInt(1, user_id);
+			//sqlの実行
 			rs = st.executeQuery();
+			//beanを宣言する
 			UsersBean bean = new UsersBean();
+			
+			//sqlで抽出されたid、name、passをループさせる。
 			while (rs.next()) {
+				
+				// idにレコードのidをセットする。
 				int id = rs.getInt("id");
+				
+				// nameにレコードのnameをセットする。
 				String name = rs.getString("name");
+				
+				// passにレコードのpassをセットする。
 				String pass = rs.getString("password");
+				
+				//beanにid、name、passをセットする。
 				bean.setId(id);
 				bean.setName(name);
 				bean.setPassword(pass);
 			}
+			//beanクラスに処理結果を返す
 			return bean;
 		} catch (Exception e) {
 			e.printStackTrace();
