@@ -73,25 +73,38 @@ public class Login extends HttpServlet {
 	    	//1.new UsersDaoを定義する事でインスタンス化している。
 	    	UsersDao dao = new UsersDao();
 	    	
-	    	//findAllを実行する。
+	    	//dao.findAllを実行する。
+	    	//ArrayList<UsersBean>の型にlistをセットする。
+	    	//listにdao.findAllの結果を格納する。
 	    	ArrayList<UsersBean> list = (ArrayList<UsersBean>) dao.findAll();
 	    	
 	    	//インスタンス化させたUsersBean beanを使用している。
 	    	//データベースから取得されたレコードを1件ずつループする。
 	    	for (UsersBean bean : list) {
-	    		//入力値とレコードの値を比較する。
+	    		
+	    		//Stringの型でloginMsgをnullで宣言する。
 	    		String loginMsg = null;
+	    		
+	    		//入力値とレコードの値を比較する。
+	    		//1.レコードidと入力値のidは等しい。レコードの文字列パスワードと入力値の文字列パスワードは等しい。
 	    		if (bean.getId() == Integer.parseInt(login_id) && login_pw.equals(bean.getPassword())) {
+	    			
+	    			//ログイン成功時のメッセージをセット
 	    		   loginMsg = "ログイン成功";
-	    		   
 	    		   
 	    		   //TOP画面へ遷移	    		   
 	    		   response.sendRedirect("./top");
+	    		   
+	    		   //returnで処理を止める。
 	    		   return;
 	    		   
 	    		} else {
+	    			
+	    			//ログイン失敗時のメッセージをセット
 	    		   loginMsg = "ログイン失敗";
 	    		}
+	    		
+	    		//if文から抜け出て来たログイン情報をセットする。
 	    		request.setAttribute("loginMsg", loginMsg);
     		}
 	    } catch (Exception e) {
@@ -99,11 +112,11 @@ public class Login extends HttpServlet {
 
 		}
 	    
-	    
 	    //login_idの設置。
+	    //※login.jspで現在は使用していない。
 	    request.setAttribute("userName", login_id);
 		
-		
+		//doGetに対してリクエストを実行する。
 		doGet(request, response);
 	}
 

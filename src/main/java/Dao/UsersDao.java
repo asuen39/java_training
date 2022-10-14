@@ -51,8 +51,8 @@ public class UsersDao extends ConnectionDao {
 			//※conとprepareStatementは連結ができる。
 			st = con.prepareStatement(sql);
 			
-			//rsに実行されたsql文を格納する。
-			//executeQueryで実行
+			//sqlの実行。
+			//executeQueryで実行されたsql文の結果をrsに格納する。
 			rs = st.executeQuery();
 			
 			// returnで返ってきたlistの結果を格納する。
@@ -63,12 +63,15 @@ public class UsersDao extends ConnectionDao {
 			//whileで繰り返しで表示する。nextは空白文字も含む
 			while (rs.next()) {
 				// idにレコードのidをセットする。
+				//getIntとは？ResultSetオブジェクトでid列の値をintとして取得する。
 				int id = rs.getInt("id");
 				
 				// nameにレコードのnameをセットする。
+				//getStringとは？ResultSetオブジェクトでname列の値をstringとして取得する。
 				String name = rs.getString("name");
 				
 				// passにレコードのパスワードをセットする。
+				//getStringとは？ResultSetオブジェクトでpassword列の値をstringとして取得する。
 				String pass = rs.getString("password");
 				
 				//beanにid,name,passを設置する。UsersBean beanで呼び出し可能にする。
@@ -81,6 +84,7 @@ public class UsersDao extends ConnectionDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("レコードの取得に失敗しました");
+			
 		} finally {
 			try {
 				if (rs != null) {
@@ -103,25 +107,42 @@ public class UsersDao extends ConnectionDao {
 	 * 指定IDのレコードを取得する
 	 */
 	//UsersBean findを宣言する。
+	//findメソッドの戻り値の型はUsersBeanと定義する。
+	//findにはuser_idの戻り値もセットする。
 	public UsersBean find(int user_id) throws Exception {
+		//データベースに繋がっているかの判定をだす
 		if (con == null) {
 			setConnection();
 		}
+		//PreparedStatementでstを定義する。
 		PreparedStatement st = null;
+		//ResultSetでrsを定義する。
 		ResultSet rs = null;
 		try {
-			//sqlを実行する。指定のidをループさせてid、name、passwordを抽出させる
+			//・変数sqlにsql文を格納する。
+			//1. usersテーブルからWHERE idで指定された値の物を1件取得する。
+			//2. レコードの取得フィールドはid、name、password
+			//※. sql文内にwhere でid = ?の条件文を設置する。
 			String sql = "SELECT id, name, password FROM users WHERE id = ?";
-			/** PreparedStatement オブジェクトの取得**/
+			
+			//・stに情報を格納。
+			//1.con はデータベースの情報格納。
+			//2. データベースに情報を送る為にprepareStatementにsql文を格納する。
 			st = con.prepareStatement(sql);
-			//sqlで1つ目の？にuser_idを代入する。
+			
+			//sql文内で1つ目の？にuser_idを代入する。
 			st.setInt(1, user_id);
+			
 			//sqlの実行
+			//executeQueryで実行されたsql文の結果をrsに格納する。
 			rs = st.executeQuery();
-			//beanを宣言する
+			
+			//・UsersDaoの型でbeanを宣言。
+	    	//new UsersDaoを定義する事でインスタンス化している。
 			UsersBean bean = new UsersBean();
 			
-			//sqlで抽出されたid、name、passをループさせる。
+			//・実行されたsqlからレコードが抽出される。
+			//whileで繰り返しで表示する。nextは空白文字も含む
 			while (rs.next()) {
 				
 				// idにレコードのidをセットする。
