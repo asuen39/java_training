@@ -61,6 +61,8 @@ public class UsersDao extends ConnectionDao {
 			
 			//実行されたsqlからレコードが抽出される。
 			//rsをwhileで繰り返し処理を行う。nextは空白文字も含む
+			//レコードの列が存在している順に繰り返し処理が行われる。
+			//※動き: レコードを1件ずつ存在確認をしてループしていく。無くなったらループから抜ける。
 			while (rs.next()) {
 				// idにレコードのidをセットする。
 				//getIntとは？ResultSetオブジェクトでid列の値をintとして取得する。
@@ -143,6 +145,8 @@ public class UsersDao extends ConnectionDao {
 			
 			//・実行されたsqlからレコードが抽出される。
 			//rsをwhileで繰り返し処理を行う。nextは空白文字も含む
+			//レコードの列が存在している順に繰り返し処理が行われる。
+			//※動き: レコードを1件ずつ存在確認をしてループしていく。無くなったらループから抜ける。
 			while (rs.next()) {
 				
 				// idにレコードのidをセットする。

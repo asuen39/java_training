@@ -82,6 +82,10 @@ public class Update extends HttpServlet {
     		//データベースから取得してきたデータをループさせて1件ずつ値を取り出す
 	    	for(CorrectAnswersBean answerBean_number : answerBean) {
 	    		
+	    		//※一回登録後に再度inputを未入力にして更新ボタンがおされたらレコードを削除する処理が必要。
+    			//※答えの文字列の有無をする判定処理が必要。
+	    		//修正課題:後で処理を追加する。
+	    		
 	    		//flag変数を宣言
 	    		int flag = 0;
 	    		
@@ -89,7 +93,7 @@ public class Update extends HttpServlet {
 	    		for (String Answer_Id : answer_Id) {
 	    			
 	    			//データベースの答え一覧のidと入力画面から送られてきたidを比較する
-	    			if(answerBean_number.getId() == Integer.parseInt(Answer_Id) ) {
+	    			if(!Answer_Id.equals("") && answerBean_number.getId() == Integer.parseInt(Answer_Id) ) {
 	    				//条件文を通過する場合はflagに1を追加して返す。
 	    				flag++;
 	    				
