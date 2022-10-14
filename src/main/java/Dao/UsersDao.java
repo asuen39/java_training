@@ -60,7 +60,7 @@ public class UsersDao extends ConnectionDao {
 			List<UsersBean> list = new ArrayList<UsersBean>();
 			
 			//実行されたsqlからレコードが抽出される。
-			//whileで繰り返しで表示する。nextは空白文字も含む
+			//rsをwhileで繰り返し処理を行う。nextは空白文字も含む
 			while (rs.next()) {
 				// idにレコードのidをセットする。
 				//getIntとは？ResultSetオブジェクトでid列の値をintとして取得する。
@@ -108,7 +108,7 @@ public class UsersDao extends ConnectionDao {
 	 */
 	//UsersBean findを宣言する。
 	//findメソッドの戻り値の型はUsersBeanと定義する。
-	//findにはuser_idの戻り値もセットする。
+	//findにuser_idの引数をセットする。
 	public UsersBean find(int user_id) throws Exception {
 		//データベースに繋がっているかの判定をだす
 		if (con == null) {
@@ -142,7 +142,7 @@ public class UsersDao extends ConnectionDao {
 			UsersBean bean = new UsersBean();
 			
 			//・実行されたsqlからレコードが抽出される。
-			//whileで繰り返しで表示する。nextは空白文字も含む
+			//rsをwhileで繰り返し処理を行う。nextは空白文字も含む
 			while (rs.next()) {
 				
 				// idにレコードのidをセットする。

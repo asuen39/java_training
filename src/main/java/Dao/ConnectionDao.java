@@ -13,6 +13,8 @@ public class ConnectionDao {
 	//String型でDRIVER_NAMEを定義する。
 	//com.mysql.cj.jdbc.Driverを格納する。
 	//※finalとは？値を変更する事が無い変数を指す。
+	//※定数定義時にfinalを使用することが多い。
+	//※定数とは?決まった値の固定値。
 	final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
 	
 	//String型でDB_NAMEを定義する。
@@ -27,8 +29,9 @@ public class ConnectionDao {
 	//c0mq69siEf.Oを格納する。
 	final String DB_PASSWORD = "c0mq69siEf.O";
 
-	//データベースの接続をする。
-	//接続結果を返す。
+	//接続情報を格納する変数
+	//メンバ変数とは？クラスの直下に書かれた変数の事。クラス内のメソッドから自由にアクセス出来る。
+	//Connectionのクラスにconのメソッドがアクセスしている。
 	public Connection con;
 
 	//ConnectionDaoを定義する。
