@@ -58,7 +58,7 @@
 							<!-- ul_AnswerListを定義して一つずつ取り出されたAnswerListを代入する。  -->
 							<%CorrectAnswersBean ul_AnswerList = AnswerList.get(a);%>
 							
-							<!-- レコードから取得してきたidとul_AnswerListを比較する。 等しい場合は通す -->
+							<!-- レコードから取得してきたidと1件ずつ取り出されたul_AnswerListのid値を比較する。 等しい場合は通す -->
 							<%if(questionsBean.getId() == ul_AnswerList.getQuestionId() ) { %>
 								<li class="list_area flex_start mt10">
 									
