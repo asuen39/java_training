@@ -88,7 +88,7 @@ public class List extends HttpServlet {
 		// 文字コードの指定
 	    request.setCharacterEncoding("utf-8");
 	    
-		// TODO Auto-generated method stub
+	  //doGetに対してリクエストを実行する。
 		doGet(request, response);
 	}
 
