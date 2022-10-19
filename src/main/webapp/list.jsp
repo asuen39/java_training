@@ -31,7 +31,9 @@
 				<button type="button" class="logout_button" onclick="NewQuestion()">新規登録</button>
 			</div>
 			<div class="main_area">
+				<!-- 取得してきた問題一覧をfor文で一つずつ取り出す  -->
 				 <%for(int i = 0; i < Questionslist.size(); i++){%>
+				 	<!-- questionsBeanを定義して一つずつ取り出されたQuestionslistを代入する。  -->
 				    <%QuestionsBean questionsBean = Questionslist.get(i);%>
 				    
 				    <ul>
@@ -47,19 +49,24 @@
 							</form>
 							
 						</li>
+						<!-- int cntを定義する。カウント用の変数を用意する。 -->
+						<!-- レコードに問題のid0が無いので1からセットする。 -->
 						<% int cnt = 1; %>
 						
+						<!-- 取得してきた回答一覧をfor文で一つずつ取り出す -->
 						<%for(int a = 0; a < AnswerList.size(); a++){%>
+							<!-- ul_AnswerListを定義して一つずつ取り出されたAnswerListを代入する。  -->
 							<%CorrectAnswersBean ul_AnswerList = AnswerList.get(a);%>
 							
-							
+							<!-- レコードから取得してきたidとul_AnswerListを比較する。 等しい場合は通す -->
 							<%if(questionsBean.getId() == ul_AnswerList.getQuestionId() ) { %>
 								<li class="list_area flex_start mt10">
 									
-									<!-- この辺りに答えの番号のカウント文を作りたい -->
+									
 									答え: <%= cnt %>
 									<label class="list_label ml25"><%=ul_AnswerList.getAnswer()%></label>
 								</li>
+								<!-- カウントを1増やす親元のfor文に戻る。 -->
 								<% cnt++; %>
 								
 							<% } %>

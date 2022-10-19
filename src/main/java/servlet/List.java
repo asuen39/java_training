@@ -33,22 +33,39 @@ public class List extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 文字コードの指定
 	    request.setCharacterEncoding("utf-8");
 	    
+	    //・例外処理の為try-catch文を使用する。
 	    try {
-	    	//問題一覧取得
+	    	
+	    	//・問題一覧取得
+	    	//1.QuestionsDaoの型でdaoを宣言。
+	    	//2.newを使用してQuestionsDaoをインスタンス化させる。
 			QuestionsDao dao = new QuestionsDao();
+			
+			//・dao.findAllを実行する。
+	    	//1.ArrayList<UsersBean>の型にlistをセットする。
+	    	//2.listにdao.findAllの結果を格納する。
 	    	ArrayList<QuestionsBean> list = (ArrayList<QuestionsBean>) dao.findAll();
 	    	
-	    	//回答一覧取得
+	    	//・回答一覧取得
+	    	//1.CorrectAnswersDaoの型にdao_answerをセットする。
+	    	//2.newを使用してCorrectAnswersDaoをインスタンス化させる。
 	    	CorrectAnswersDao dao_answer = new CorrectAnswersDao();
+	    	
+	    	//dao_answer.findAllを実行する。
+	    	//1.ArrayList<CorrectAnswersBean>の型にlist_answerをセットする。
+	    	//2.list_answerにdao_answer.findAllの結果を格納する。
 	    	ArrayList<CorrectAnswersBean> list_answer = (ArrayList<CorrectAnswersBean>) dao_answer.findAll();
 	    	
+	    	//リクエストに対してquestionListにlistを格納してセットする。
 	    	request.setAttribute("questionList", list);
 	    	
+	    	//リクエストに対してanswerListにlist_answerを格納してセットする。
 	    	request.setAttribute("answerList", list_answer);
 	    	
 	    	
@@ -57,9 +74,9 @@ public class List extends HttpServlet {
 
 		}
 		
-		//	JSP読み込み	
+		//list.jsqpをリクエスト	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/list.jsp");
-		
+		//リクエストを実行
 		dispatcher.forward(request, response);
 		
 	}
