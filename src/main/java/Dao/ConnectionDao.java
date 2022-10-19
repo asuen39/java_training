@@ -31,7 +31,7 @@ public class ConnectionDao {
 
 	//接続情報を格納する変数
 	//メンバ変数とは？クラスの直下に書かれた変数の事。クラス内のメソッドから自由にアクセス出来る。
-	//Connectionオブジェクトの変数にconのクラスがアクセスしている。
+	//Connectionオブジェクトを変数conに定義する。
 	public Connection con;
 
 	//ConnectionDaoを定義する。

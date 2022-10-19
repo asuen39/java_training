@@ -104,6 +104,13 @@ public class QuestionsDao extends ConnectionDao {
 	//QuestionsBean findを宣言する。
 	//findメソッドの戻り値の型はQuestionsBeanと定義する。
 	//findにint idの引数をセットする。
+	/**
+	  * 指定IDのレコードを取得する
+	  * @param int id
+	  * @throws(Exception)
+	  * @return QuestionsBean
+	 **/
+	//※@param は引数、@returnは返り値、@throwsは発生する可能性のある例外
 	public QuestionsBean find(int id) throws Exception {
 		
 		//データベースに繋がっているか判定をだす。
@@ -190,6 +197,11 @@ public class QuestionsDao extends ConnectionDao {
 	//voidなのでdeleteメソッドの戻り値は無しとなる。
 	//deleteにint idの引数をセットする。
 	//※引数とはメソッドに渡すデータ。「この値を使ってデータを処理して欲しい」というときに、渡す値のこと
+	/**
+	  * 指定IDのレコードを削除する
+	  * @param int id
+	  * @throws(Exception)
+	 **/
 	public void delete(int id) throws Exception {
 		
 		//データベースに繋がっているか判定をだす。
@@ -249,6 +261,11 @@ public class QuestionsDao extends ConnectionDao {
 	//void updateを宣言する。
 	//voidなのでupdateメソッドの戻り値は無しとなる。
 	//updateにint edit_id、String textarea_editの引数をセットする。
+	/**
+	  * 指定IDのレコードを更新する
+	  * @param int edit_id、String textarea_edit
+	  * @throws(Exception)
+	 **/
 	public void update(int edit_id, String textarea_edit) throws Exception {
 		
 		//データベースに繋がっているか判定をだす。
@@ -312,6 +329,11 @@ public class QuestionsDao extends ConnectionDao {
 	//void entryを宣言する。
 	//voidなのでentryメソッドの戻り値は無しとなる。
 	//entryにString textarea_editの引数をセットする。
+	/**
+	  * 指定のレコード登録する
+	  * @param String textarea_edit
+	  * @throws(Exception)
+	 **/
 	public void entry(String textarea_edit) throws Exception {
 		
 		//データベースに繋がっているか判定をだす。
