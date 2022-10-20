@@ -263,7 +263,8 @@ public class QuestionsDao extends ConnectionDao {
 	//updateにint edit_id、String textarea_editの引数をセットする。
 	/**
 	  * 指定IDのレコードを更新する
-	  * @param int edit_id、String textarea_edit
+	  * @param int edit_id
+	  * @param String textarea_edit
 	  * @throws(Exception)
 	 **/
 	public void update(int edit_id, String textarea_edit) throws Exception {

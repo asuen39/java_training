@@ -359,7 +359,8 @@ public class CorrectAnswersDao extends ConnectionDao {
 	//※entryAnswerにint questions_id、 String answer1の引数をセットする。
 	/**
 	  * 指定のレコード登録する
-	  * @param int questions_id、 String answer1
+	  * @param int questions_id
+	  * @param String answer1
 	  * @throws(Exception)
 	  * @return entryAnswer
 	 **/
@@ -431,7 +432,8 @@ public class CorrectAnswersDao extends ConnectionDao {
 	//※updateAnswerにint Answer_Id、 String answerTextの引数をセットする。
 	/**
 	  * 指定IDのレコードを更新する
-	  * @param int Answer_Id、 String answerText
+	  * @param int Answer_Id
+	  * @param String answerText
 	  * @throws(Exception)
 	 **/
 	public void updateAnswer(int Answer_Id, String answerText) throws Exception {
@@ -499,7 +501,8 @@ public class CorrectAnswersDao extends ConnectionDao {
 	//※insertAnswerにint edit_id、 String answer1の引数をセットする。
 	/**
 	  * 指定IDのレコードを追加する
-	  * @param int edit_id, String answer1
+	  * @param int edit_id
+	  * @param String answer1
 	  * @throws(Exception)
 	 **/
 	public void insertAnswer(int edit_id, String answer1) throws Exception {
