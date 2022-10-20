@@ -37,7 +37,7 @@
 				    <%QuestionsBean questionsBean = Questionslist.get(i);%>
 				    
 				    <ul>
-				    	<!-- 問題番号欄にquestionsBean.getId()から値を設置する。 -->
+				    	<!-- li配下の問題番号欄にquestionsBean.getId()から値を設置する。 -->
 						<li class="list_area">問題:<span class="toi_number"><%=questionsBean.getId()%></span>
 							<!-- 問題テキスト欄にquestionsBean.getQuestion()で文字列を設置する。 -->
 							<label class="list_label"><%=questionsBean.getQuestion()%></label>

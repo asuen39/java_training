@@ -28,89 +28,150 @@ public class Confirm extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 文字コードの指定
+		/**
+		 * 文字コードの指定
+		 * request設定後にsetCharacterEncoding設置
+		 * 文字コード: utf-8
+		 */
 	    request.setCharacterEncoding("utf-8");
 	    
-	    //formから値を取得
+	    /**
+	     * confirm.jspのform値を取得
+	     * @param String textarea_edit: request.getParameterでtextarea_editを取得します。
+	     * @param String[] answer: request.getParameterValuesでanswerを取得します。
+	     */
   		String textarea_edit = request.getParameter("textarea_edit");
   		String[] answer = request.getParameterValues("answer");
   		
-  		//System.out.println(textarea_edit);
-  		//System.out.println(answer);
-  		
-  		//文字数チェック テキストエリア
-  		//エラーメッセージ
+  		/**
+		 * テキストエリアの文字数チェックを行う。
+		 * エラーメッセージ
+		 * @param String inputerror: 初期値にnullを設置する。
+		 */
   		String inputerror = null;
-  		if(textarea_edit.length() < 5) {
+  		
+  		/*
+  		 * if文を使用する。
+		 * textarea_updateをlengthで数値に変換する。
+		 * 500文字の数値と比較する条件文を作成する。
+		 * */
+  		if(textarea_edit.length() < 500) {
+  			//リクエストに対してtextAreaEditにtextarea_editを格納してセットする。
+			//request.setAttributeを利用する。
   			request.setAttribute("textAreaEdit", textarea_edit);
   		} else {
+  			//textarea_edit_errorをinputerrorに代入する。
   			inputerror = "textarea_edit_error";
-  			//入力画面へ遷移	    		   
+  			
+  			//リダイレクトの設置をする。
+			//url: /java_training/register?inputerror=" + inputerror	    		   
   			response.sendRedirect("/java_training/register?inputerror=" + inputerror);
+  			
+  			//結果を返しこの条件文での処理を止める。
   			return;
   		}
   	    
-  	    //文字数チェック 答え一覧
+  		/**
+		 * 答え一覧の文字数チェックを行う。
+		 * for文をループさせて一つずつ取り出す。
+		 * for文を使用する。
+		 * @param String checkAnswer: 定義する
+		 * answerでfor文の条件文を作成する。
+		 */
   	    for (String checkAnswer : answer) {
+  	    	//checkAnswerをlengthで数値に変換する。
+  	    	//200文字の数値と比較する条件文を作成する。
   	    	if(checkAnswer.length() < 200) {
-  	    		//nullや空文字の影響の為java側で処理をせずパラメータとして設置する。jspで読む込む処理を設置する。
+  	    		//リクエストに対してanswerListにanswerを格納してセットする。
+  	    		//request.setAttributeを利用する。
   	    		request.setAttribute("answerList", answer);
-  	  	  	    
-  	    		//残しておく
-  	  	  	    //String[] answerAry = new String[answer.length];
-  	  	  	    //for (int i = 0; i < answer.length; i++) {
-  	  	  	    //	if (answer[i] != null && !"".equals(answer[i])) {
-	  	  	  	//	  answerAry[i] = answer[i];
-		  	  	//    }
-  	  	  	    //}
-  	  	  	    //request.setAttribute("answerList", answerAry);
   	    	} else {
+  	    		//answer_errorをinputerrorに代入する。
   	    		inputerror = "answer_error";
-  	  			//入力画面へ遷移	    		   
+  	    		
+  	    		//リダイレクトの設置をする。
+  	    		//url: /java_training/register?inputerror=" + inputerror   		   
   	    		response.sendRedirect("/java_training/register?inputerror=" + inputerror);
+  	    		
+  	    		//結果を返しこの条件文での処理を止める。
   	  			return;
   	    	}
   	    }
-
-  	    //エラー文章 宣言。
+  	    
+  	    /**
+  	     *エラー文章
+  	     *@param String errorMsgTextarea: 初期値をnullにする。
+  	     *@param String errorMsgAnswer: 初期値をnullにする。
+  	     */
   	    String errorMsgTextarea = null;
   	    String errorMsgAnswer = null;
   	    
-  	    //文字数未入力 問題エラーチェック
+  	    /**
+  	     * 文字数未入力 問題エラーチェック
+  	     * if文を作成する。
+  	     * textarea_editをnullか判定
+  	     * textarea_editが空文字か判定
+  	     * どちらかが通るかの条件文を作成する。
+  	     */
   	    if (textarea_edit == null || "".equals(textarea_edit)) {
+  	    	
+  	    	//errorMsgTextareaに文字列を代入する。
   	    	errorMsgTextarea = "問題が未入力です。";
-  		   
-  		   //問題のエラーのパラメータを設置する。jspで読み込む処理を設定する。
+  	    	
+  	    	//リクエストに対してerrorMsgTextareaにerrorMsgTextareaを格納してセットする。
+  	    	//request.setAttributeを利用する。
   	  	   request.setAttribute("errorMsgTextarea", errorMsgTextarea);
   		}
   	    
-  	    
-  	    //文字数未入力 答えエラーチェック
+  	    /**
+  	     * 文字数未入力 答えエラーチェック
+  	     * for文を使用する。
+  	     * @parsn int i: 初期値を0にする。
+  	     * answerをlengthで数値化する。
+  	     * iとanswerで条件文を作成する。
+  	     */
 	  	for( int i = 0; i < answer.length; i++){
-	  		//答え欄3つあるが1つだけ入力された状態等の空きinputが送られてくる場合、
-	  		//空きinputをここで排除する。全部空きinputだったらfor文から抜けてエラー文が実行される。
-	  		//equalsの判定にする事で文字の判定に抜けが無いようにする。
+	  		
+	  		//if文を使用する。
+	  		//answerをequalsで空文字と比較する。
 	  		if(!answer[i].equals("")) {
-	  			System.out.println(answer[i]);
 	  			
-	  			//答えが入力を確認出来たら実行する。
+	  			// /register/confirm.jspをリクエスト
+	  			//RequestDispatcherを型にdispatcherに代入する。
 	  			RequestDispatcher dispatcher = request.getRequestDispatcher("/register/confirm.jsp");
+	  			
+	  			//リクエストを実行する。
+	  			//dispatcher.forwardを使用する。
 	  			dispatcher.forward(request, response);
-	  			//答えが入力を確認出来たらretunで止める。
+	  			
+	  			//結果を返しこの条件文での処理を止める。
 	  			return;
 	  		}
 	  	}
 	  	
-	  	//答えのfor文から未入力の値が来た場合に実行する。
-	  	//答えエラーチェックで文字入力が確認されていればjspに移動させる為こちらが実行される事はない。
+	  	/**
+	  	 *  答えのfor文から未入力の値が来た場合に実行する。
+	  	 *  答えエラーチェックで文字入力が確認されていればjspに移動させる為こちらが実行される事はない。
+	  	 *  errorMsgAnswerにエラー文章を代入する。
+	  	 */
 	  	errorMsgAnswer = "答えが未入力です。";
 	  	
-	  	//答えのエラーをパラメータを設置する。
+	  	/**
+	  	 * リクエストに対してerrorMsgAnswerにerrorMsgAnswerを格納してセットする。
+	  	 * request.setAttributeを利用する。
+	  	 */
 	  	request.setAttribute("errorMsgAnswer", errorMsgAnswer);
 	    
-		//	JSP読み込み	
+		/**
+		 * /register/confirm.jspをリクエスト
+		 * RequestDispatcherを型にdispatcherに代入する。
+		 */
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/register/confirm.jsp");
 		
+		/**
+		 * リクエストを実行する。
+		 * dispatcher.forwardを使用する。
+		 */
 		dispatcher.forward(request, response);
 	}
 
@@ -118,7 +179,7 @@ public class Confirm extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//doGetに対してリクエストを実行する。
 		doGet(request, response);
 	}
 

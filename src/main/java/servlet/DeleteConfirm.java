@@ -34,31 +34,61 @@ public class DeleteConfirm extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 文字コードの指定
+		/**
+		 * 文字コードの指定
+		 * request設定後にsetCharacterEncoding設置
+		 * 文字コード: utf-8
+		 */
 	    request.setCharacterEncoding("utf-8");
 	    
-	    //list 削除ボタンからの値を取得
+	    /**
+	     * list.jspからform値を取得
+	     * @param int delete_id: Integer.parseIntで数値を指定しrequest.getParameterでdelete_idを取得します。
+	     */
 	    int delete_id = Integer.parseInt(request.getParameter("delete_id"));
 	    
+	    //例外処理の為try-catch文を使用する。
 	    try {
-	    	//問題一覧取得
+	    	/**
+	    	 * 問題一覧取得
+	    	 * QuestionsDaoの型でdaoを宣言。
+	    	 * newを使用してQuestionsDaoをインスタンス化させる。
+	    	 * */
 			QuestionsDao dao = new QuestionsDao();
 	    	
-			//削除のIDを問題一覧のIDと比較
+			/**
+	    	 * 削除のIDを問題一覧のIDと比較
+	    	 * dao.findに引数delete_idを設置して実行する。
+	    	 * QuestionsBeanの型にquestionsBeanをセットする。
+	    	 * questionsBeanにdao.findの結果を格納する。
+	    	 * */
 	    	QuestionsBean questionsBean = dao.find(delete_id);
 	    	
-	    	//コンソールに表示するだけ。確認用
-	    	//questionsBean.outputData();
 	    	
-	    	//問題一覧設置
+	    	/**
+	    	 * リクエストに対してquestionListにquestionsBeanを格納してセットする。
+	    	 * request.setAttributeを利用する。
+	    	 */
 	    	request.setAttribute("questionList", questionsBean);
 	    	
-	    	
-	    	//回答一覧取得
+	    	/**
+			 * 回答一覧取得
+			 * CorrectAnswersDaoの型でdao_answerを宣言。
+			 * newを使用してCorrectAnswersDaoをインスタンス化させる。
+			 */
 	    	CorrectAnswersDao dao_answer = new CorrectAnswersDao();
+	    	
+	    	/**
+	    	 * dao_answer.findByQuetionsIdに引数delete_idを設置して実行する。
+	    	 * ArrayList ＜CorrectAnswersBean＞ の型にanswerBeanをセットする。
+	    	 * answerBeanにdao_answer.findByQuetionsIdの結果を格納する。
+	    	 */
 	    	ArrayList<CorrectAnswersBean> answerBean = (ArrayList<CorrectAnswersBean>) dao_answer.findByQuetionsId(delete_id);
 	    	
-	    	//回答一覧設置
+	    	/**
+	    	 * リクエストに対してanswerListにanswerBeanを格納してセットする。
+	    	 * request.setAttributeを利用する。
+	    	 */
 	    	request.setAttribute("answerList", answerBean);
 	    	
 	    	
@@ -68,9 +98,16 @@ public class DeleteConfirm extends HttpServlet {
 
 		}
 	
-		//	JSP読み込み
+		/**
+		 * /delete_confirm.jspをリクエスト
+		 * RequestDispatcherを型にdispatcherに代入する。
+		 */
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/delete_confirm.jsp");
 		
+		/**
+		 * リクエストを実行する。
+		 * dispatcher.forwardを使用する。
+		 */
 		dispatcher.forward(request, response);
 	}
 

@@ -14,9 +14,11 @@
 <script type="text/javascript" src="/java_training/js/edit/confirm.js"></script>
 <!-- 問題番号のIDをリクエスト -->
 <% String EditId = (String)request.getAttribute("editId"); %>
-<!-- テキストエリアのデータをリクエスト -->
+<!-- テキストエリアをリクエスト -->
 <% String TextAreaUpdate = (String)request.getAttribute("textAreaUpdate"); %>
+<!-- 回答一覧の配列をリクエスト -->
 <% String[] AnswerUpdateId = (String[])request.getAttribute("answerUpdateId"); %>
+<!-- 回答一覧のidをリクエスト -->
 <% String[] AnswerListUpdate = (String[])request.getAttribute("answerListUpdate"); %>
 
 <input type="hidden" class="questionId" value="<%= EditId %>">
@@ -29,9 +31,16 @@
 			<form action="./update" method="post" class="top_area" style="width:100%;">
 				<div class="main_area">
 					<ul>
-						<li class="edit_area">問題番号:<span class="toi_number"><%= EditId %></span><input type="hidden" name="toi_number_up" value="<%= EditId %>"></li>
+						<li class="edit_area">問題番号:
+							<!-- li配下の問題番号欄にEditIdの値を設置する。 -->
+							<span class="toi_number"><%= EditId %></span>
+							<!--submitでEditIdを送る。hiddenタイプのinput valueを設置する。 -->
+							<input type="hidden" name="toi_number_up" value="<%= EditId %>">
+						</li>
 						<li class="edit_area flex_end">問題: 
+							<!-- 問題テキスト欄にTextAreaUpdateを設置する。 -->
 							<label class="label_textarea"><%= TextAreaUpdate %></label>
+							<!--submitでTextAreaUpdateを送る。hiddenタイプのinput valueを設置する。 -->
 							<input type="hidden" name="textarea_edit" value="<%= TextAreaUpdate %>">
 						</li>
 						<li class="edit_area flex_end">
@@ -39,18 +48,22 @@
 								<li class="edit_area">答え: </li>
 								<li style="width: 94%;">
 									<ul>
-									<!-- 配列の処理 -->
+									<!-- 取得してきた回答一覧をfor文で一つずつ取り出す  -->
 									<%for( int i = 0; i < AnswerListUpdate.length; i++){ %>
-										<!-- nullや空文字の処理 -->
+										<!-- 1つずつ取り出したAnswerListUpdateでnullチェックを行う -->
 								      <% if (AnswerListUpdate[i] != null) { %>
+								      	<!-- 条件文を通過したAnswerListUpdateの値を設置する。  -->
 								         <li class="edit_area flex_end edit_area_answer"><label class="label_long"><%= AnswerListUpdate[i] %></label></li>
+								         <!--submitでAnswerListUpdateを送る。hiddenタイプのinput valueを設置する。 -->
 								         <input type="hidden" name="answer" value="<%= AnswerListUpdate[i] %>">
 								      <% } %>
 								    <% } %>
 								    
+								    <!-- 取得してきた回答一覧のidをfor文で一つずつ取り出す  -->
 								    <%for( int i = 0; i < AnswerUpdateId.length; i++){ %>
-										<!-- nullや空文字の処理 -->
+										<!-- 1つずつ取り出したidでnullチェックを行う -->
 								      <% if (AnswerUpdateId[i] != null) { %>
+								      	 <!--submitでAnswerUpdateIdを送る。hiddenタイプのinput valueを設置する。 -->
 								         <input type="hidden" name="answer_Id" value="<%= AnswerUpdateId[i] %>">
 								      <% } %>
 								    <% } %>

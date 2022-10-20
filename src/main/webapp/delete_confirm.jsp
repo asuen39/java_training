@@ -15,10 +15,8 @@
 <!-- JS読み込み -->
 <script type="text/javascript" src="./js/all.js"></script>
 <script type="text/javascript" src="./js/delete_confirm.js"></script>
-
 <!-- 問題一覧のリクエストデータの取得 -->
 <%QuestionsBean questionsBean = (QuestionsBean)request.getAttribute("questionList"); %>
-
 <!-- 回答データ一覧のリクエスト取得 -->
 <% ArrayList<CorrectAnswersBean> answerBean = (ArrayList<CorrectAnswersBean>) request.getAttribute("answerList"); %>
 
@@ -31,6 +29,7 @@
 			<div class="main_area">
 				<ul >
 					<li class="edit_area flex_end">問題: 
+						<!-- 問題テキスト欄にquestionsBean.getQuestion()で文字列を設置する。 -->
 						<label class="label_textarea"><%=questionsBean.getQuestion()%></label>
 					</li>
 					<li class="edit_area flex_end">
@@ -38,9 +37,13 @@
 							<li class="edit_area">答え: </li>
 							<li style="width: 94%;">
 								<ul>
+								
+								<!-- 取得してきた回答一覧をfor文で一つずつ取り出す -->
 								<% for(int a = 0; a < answerBean.size(); a++){ %>
+									<!-- ul_answerBeanを定義して一つずつ取り出されたanswerBeanを代入する。  -->
 									 <% CorrectAnswersBean ul_answerBean = answerBean.get(a); %>
 									<li class="edit_area edit_area_answer">
+										<!-- ループで合致したidの答え一覧を設置する。 -->
 										<label class="label_long"><%= ul_answerBean.getAnswer() %></label>
 									</li>
 								<% } %>
