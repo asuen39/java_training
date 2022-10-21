@@ -89,7 +89,7 @@ public class Update extends HttpServlet {
 	    	
 	    	/**
 	    	 * for文を使用する。
-	    	 * answer_Idをlengthとして数値化する。
+	    	 * answer_Idをlengthメソッドで文字数を取得する。
 	    	 * iとの比較文を作成する。
 	    	 */
     		for ( i = 0; i < answer_Id.length; i++) {

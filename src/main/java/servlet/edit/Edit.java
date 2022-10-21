@@ -41,7 +41,6 @@ public class Edit extends HttpServlet {
 		 */
 	    request.setCharacterEncoding("utf-8");
 	    
-	    
 	    /**
 	     * 削除ボタンからの値を取得
 	     * @param int edit_id

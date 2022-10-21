@@ -70,7 +70,7 @@ public class Confirm extends HttpServlet {
 		String inputerror = null;
 		
 		/*
-		 * textarea_updateをlengthで数値に変換する。
+		 * textarea_updateをlengthメソッドで文字数を取得する。
 		 * 500文字の数値と比較する条件文を作成する。
 		 * */
 		if(textarea_update.length() < 500) {
@@ -97,7 +97,7 @@ public class Confirm extends HttpServlet {
 		 * answer_updateでfor文の条件文を作成する。
 		 * */
 		for (String checkAnswer : answer_update) {
-			//checkAnswerをlengthで数値に変換する。
+			//checkAnswerをlengthメソッドで文字数を取得する。
 			//200文字の数値と比較する条件文を作成する。
 			if(checkAnswer.length() < 200) {
 				//リクエストに対してanswerListUpdateにanswer_updateを格納してセットする。
