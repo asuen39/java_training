@@ -523,7 +523,7 @@ public class CorrectAnswersDao extends ConnectionDao {
 			//・変数sqlにsql文を格納する。
 			//1. correct_answersテーブルからセットされたcorrect_answersとvaluesで指定された値の物を登録する。
 			//※. sql文内にINSERTで指定の配列設置後、valuesで(?, ?)の条件文を設置する。
-			String sql = "INSERT INTO correct_answers (questions_id, answer) values(?, ?)";
+			String sql = "INSERT INTO correct_answers (questions_id, answer, created_at, updated_at) values(?, ?, current_timestamp(),current_timestamp())";
 
 			//stに情報を格納。
 			//1.con はデータベースの情報格納。
