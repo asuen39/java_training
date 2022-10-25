@@ -29,9 +29,17 @@ public class Top extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//	JSP読み込み	
+		/**
+		 * /top.jspをリクエスト
+		 * RequestDispatcherを型にdispatcherを定義する。
+		 * request.getRequestDispatcherでdispatcherに代入する。
+		 */
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/top.jsp");
 		
+		/**
+		 * リクエストを実行する。
+		 * dispatcher.forwardを使用する。
+		 */
 		dispatcher.forward(request, response);
 	}
 
@@ -40,11 +48,14 @@ public class Top extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 文字コードの指定
+		/**
+		 * 文字コードの指定
+		 * request設定後にsetCharacterEncoding設置
+		 * 文字コード: utf-8
+		 */
 	    request.setCharacterEncoding("utf-8");
 	    
-	    
-		// TODO Auto-generated method stub
+	    //doGetに対してリクエストを実行する。
 		doGet(request, response);
 	}
 

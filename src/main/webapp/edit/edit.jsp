@@ -36,9 +36,14 @@
 			<form action="./edit/confirm" method="post" class="top_area">
 				<div class="main_area">
 					<ul>
-						<li class="edit_area">問題番号:<span class="toi_number"><%= EditId %></span></li>
+						<li class="edit_area">問題番号:
+							<!-- li配下の問題番号欄にquestionsBean.getId()から値を設置する。 -->
+							<span class="toi_number"><%= EditId %></span>
+						</li>
+						<!-- confirmに問題番号のidを送る。hiddenタイプのinput valueを設置する。valueには EditIdを設置する。 -->
 						<input type="hidden" name="edit_id" value="<%= EditId %>">
 						<li class="edit_area">問題: 
+							<!-- 問題テキスト欄にquestionsBean.getQuestion()で文字列を設置する。 -->
 							<textarea name="textarea_update" rows="6" cols="85"><%=questionsBean.getQuestion()%></textarea>
 						</li>
 						<li class="edit_area">
@@ -46,11 +51,16 @@
 								<li class="edit_area">答え: </li>
 								<li style="width: 94%;">
 									<ul id="ul_list">
+									<!-- 取得してきた回答一覧をfor文で一つずつ取り出す  -->
 									<% for(int a = 0; a < answerBean.size(); a++){ %>
+										<!-- ul_answerBeanを定義して一つずつ取り出されたanswerBeanを代入する。  -->
 										 <% CorrectAnswersBean ul_answerBean = answerBean.get(a); %>
 										<li class="edit_area">
+											<!-- ループから選出されたidを答え一覧の文字列をを設置する。 -->
 											<input type="text" name="answer_update" style="width: 92%;" value="<%= ul_answerBean.getAnswer() %>">
 											<button type="button" onclick="delete_btn(this)">削除</button>
+											<!-- confirmに回答一覧の文字列を配列で送る。hiddenタイプのinput valueを設置する。valueには ul_answerBean.getId()を設置する。 -->
+											<input type="hidden" name="answer_update_id" value="<%= ul_answerBean.getId() %>">
 										</li>
 									<% } %>
 									</ul>
@@ -65,10 +75,12 @@
 					<button type="button" id="addition_btn" class="auto-right logout_button">追加</button>
 				</div>
 			</form>
+			<!-- 追加ボタン押し時にli要素をクローンする為に  -->
 			<ul class="close_area">
 				<li class="edit_area addition_content">
 					<input type="text" name="answer_update" style="width: 92%;">
 					<button type="button" onclick="delete_btn(this)">削除</button>
+					<input type="hidden" name="answer_update_id" value="">
 				</li>
 			</ul>
 		</div>
