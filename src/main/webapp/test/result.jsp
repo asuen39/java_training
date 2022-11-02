@@ -16,7 +16,7 @@
 <script type="text/javascript" src="../js/all.js"></script>
 
 <!-- ログインのリクエストデータの取得 -->
-<% UsersBean LoginId = (UsersBean)request.getAttribute("LoginId"); %>
+<% UsersBean LoginUser = (UsersBean)request.getAttribute("loginUser"); %>
 
 <!-- 問題数のリクエストデータの取得 -->
 <% int TestId = (int)request.getAttribute("testId"); %>
@@ -41,7 +41,7 @@
 			</div>
 			<div class="main_area">
 				<!-- ユーザー名表示 -->
-				<p class="ml10"><%= LoginId.getName() %></p>
+				<p class="ml10"><%= LoginUser.getName() %></p>
 				<!-- 問題数と合っている回答数の表示 -->
 				<p class="ml10"><%= TestId %>問中<%= CountAnswer %>問正解です。</p>
 				<!-- 点数の表示 -->

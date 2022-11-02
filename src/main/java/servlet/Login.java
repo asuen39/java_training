@@ -55,22 +55,16 @@ public class Login extends HttpServlet {
 	// formでmethod="post"を指定している為dopostで受け取る。
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 文字コードの指定
-	    request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 	    
-		//・formからの値を取得
+	    //・formからの値を取得
 	    //1.stringで取得するようにする。取得はrequest.getParameterを使用する。
 		String login_id = request.getParameter("login_id");
 		String login_pw = request.getParameter("login_pw");
 		//コンソールに結果表示		
-	    //System.out.println(login_id);
-	    //System.out.println(login_pw);
+		//System.out.println(login_id);
+		//System.out.println(login_pw);
 		
-		//セッションの作成
-		HttpSession session = request.getSession();
-    	
-    	//ログイン情報をsessionに保存
-		session.setAttribute("Login_Id", login_id);
-	    
 		//・例外処理の為try-catch文を使用する。
 		//※理由: javaでは例外が発生しうる箇所で何かしらの対処をしないとコンパイルエラーになる。
 		//※例外処理に対する処理をしないとエラーが発生する。
@@ -95,20 +89,24 @@ public class Login extends HttpServlet {
 	    		//入力値とレコードの値を比較する。
 	    		//1.レコードidと入力値のidは等しい。レコードの文字列パスワードと入力値の文字列パスワードは等しい。
 	    		if (bean.getId() == Integer.parseInt(login_id) && login_pw.equals(bean.getPassword())) {
-	    			
 	    			//ログイン成功時のメッセージをセット
-	    		   loginMsg = "ログイン成功";
-	    		   
-	    		   //TOP画面へ遷移	    		   
-	    		   response.sendRedirect("./top");
-	    		   
-	    		   //returnで処理を止める。
-	    		   return;
-	    		   
-	    		} else {
+	    			loginMsg = "ログイン成功";
 	    			
+	    			//セッションの作成
+	    			HttpSession session = request.getSession();
+	    			
+	    			//ログイン情報をsessionに保存
+	    			session.setAttribute("Login_Id", login_id);
+	    			
+	    			//TOP画面へ遷移
+	    			response.sendRedirect("./top");
+	    			
+	    			//returnで処理を止める。
+	    			return;
+	    			
+	    		} else {
 	    			//ログイン失敗時のメッセージをセット
-	    		   loginMsg = "ログイン失敗";
+	    			loginMsg = "ログイン失敗";
 	    		}
 	    		
 	    		//if文から抜け出て来たログイン情報をセットする。

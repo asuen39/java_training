@@ -64,19 +64,19 @@ public class Result extends HttpServlet {
 	    	UsersDao dao = new UsersDao();
 	    	
 	    	//dao.findを実行する。
-	    	//UsersBeanの型にuser_idをセットする。
-	    	//user_idにdao.findの結果を格納する。
-	    	UsersBean user_id = dao.find(login_id);
+	    	//UsersBeanの型にlogin_userをセットする。
+	    	//login_userにdao.findの結果を格納する。
+	    	UsersBean login_user = dao.find(login_id);
 	    	
-	    	//リクエストに対してLoginIdにuser_idを格納してセットする。
-	    	request.setAttribute("LoginId", user_id);
+	    	//リクエストに対してloginUserにlogin_userを格納してセットする。
+	    	request.setAttribute("loginUser", login_user);
 	    	
-	    	//int型でsum_test_idを定義する。
-	    	//test_idをlengthしてsum_test_idに格納する。
-	    	int sum_test_id = test_id.length;
+	    	//int型でnumber_of_questionsを定義する。
+	    	//test_idをlengthしてnumber_of_questionsに格納する。
+	    	int number_of_questions = test_id.length;
 	    	
 	    	//リクエストに対してtestIdにsum_test_idを格納してセットする。
-	    	request.setAttribute("testId", sum_test_id);
+	    	request.setAttribute("testId", number_of_questions);
 	    	
 	    	//int型にcount_answerを定義する。カウント変数を用意する。
 	    	int count_answer = 0;
@@ -132,9 +132,10 @@ public class Result extends HttpServlet {
 	    	}
 	    	
 	    	//点数計算
-	    	int score = 100 * count_answer / sum_test_id;
+	    	int score = 100 * count_answer / number_of_questions;
 	    	
-	    	//小数点第1位で四捨五入
+	    	//小数点第1位で四捨五入する。
+	    	//Math.roundを利用する。roundメソッドの返り値は四捨五入された値になる。
 	    	Math.round(score);
 	    	
 	    	//リクエストに対してscoreにscoreを格納してセットする。
