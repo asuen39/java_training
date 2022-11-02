@@ -113,20 +113,22 @@ public class Result extends HttpServlet {
 		    		//test_answerにiを使用する
 		    		//equalsでrecode_list.getAnswerと比較する。
 		    		if(test_answer[i].equals(recode_list.getAnswer()) ) {
+		    			
 		    			//入力画面とレコードの回答が合っていたらカウント変数に1増やす。
 		    			count_answer++;
 		    			
-		    			//リクエストに対してcountAnswerにcount_answerを格納してセットする。
-		    			request.setAttribute("countAnswer", count_answer);
-		    			
 		    		} else {
+		    			
 		    			//入力画面とレコードの回答が1つも合っていなかったら実行する。
 		    			if(count_answer == 0) {
-		    				//リクエストに対してcountAnswerにcount_answerを格納してセットする。
-		    				request.setAttribute("countAnswer", count_answer);
+		    				
+		    				//count_answerに0をセットする。
+		    				count_answer = 0;
 		    			}
 		    		}
 		    		
+		    		//リクエストに対してcountAnswerにcount_answerを格納してセットする。
+	    			request.setAttribute("countAnswer", count_answer);
 		    	}
 		    	
 	    	}
