@@ -71,15 +71,17 @@ public class Result extends HttpServlet {
 	    	//リクエストに対してloginUserにlogin_userを格納してセットする。
 	    	request.setAttribute("loginUser", login_user);
 	    	
-	    	//int型でnumber_of_questionsを定義する。
+	    	//double型でnumber_of_questionsを定義する。
+	    	//※doubleで指定する理由: intだと小数点切り捨てになってしまう為。
 	    	//test_idをlengthしてnumber_of_questionsに格納する。
-	    	int number_of_questions = test_id.length;
+	    	double number_of_questions = test_id.length;
 	    	
 	    	//リクエストに対してtestIdにsum_test_idを格納してセットする。
-	    	request.setAttribute("testId", number_of_questions);
+	    	request.setAttribute("testId", (int)number_of_questions);
 	    	
-	    	//int型にcount_answerを定義する。カウント変数を用意する。
-	    	int count_answer = 0;
+	    	//double型にcount_answerを定義する。カウント変数を用意する。
+	    	//※doubleで指定する理由: intだと小数点切り捨てになってしまう為。
+	    	double count_answer = 0;
 	    	
 	    	/**
 	    	 * for文を使用する。
@@ -128,17 +130,17 @@ public class Result extends HttpServlet {
 		    		}
 		    		
 		    		//リクエストに対してcountAnswerにcount_answerを格納してセットする。
-	    			request.setAttribute("countAnswer", count_answer);
+		    		request.setAttribute("countAnswer", (int)count_answer);
 		    	}
 		    	
 	    	}
 	    	
 	    	//点数計算
-	    	int score = 100 * count_answer / number_of_questions;
-	    	
-	    	//小数点第1位で四捨五入する。
-	    	//Math.roundを利用する。roundメソッドの返り値は四捨五入された値になる。
-	    	Math.round(score);
+	    	//int型にscoreを定義する。
+	    	//小数点第1位で四捨五入する。Math.roundを利用する。roundメソッドの返り値は四捨五入された値になる。
+	    	//count_answerとnumber_of_questionsを先に割り、100を掛ける。
+	    	//(int) Math.round指定の結果をsocreに格納する。
+	    	int score = (int) Math.round(100 * (count_answer / number_of_questions));
 	    	
 	    	//リクエストに対してscoreにscoreを格納してセットする。
 	    	request.setAttribute("score", score);
