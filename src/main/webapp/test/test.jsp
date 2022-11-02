@@ -41,10 +41,10 @@
 								<label class="label_textarea"><%=questionsBean.getQuestion()%></label>
 								
 								<!--submitでquestionsBean.getIdを送る。hiddenタイプのinput valueを設置する。 -->
-								<input type="hidden" name="questions_id" value="<%= questionsBean.getId() %>">
+								<input type="hidden" name="test_id" value="<%= questionsBean.getId() %>">
 							</li>
 							<li class="edit_area space_between">回答
-								<input type="text" style="width:93%;">
+								<input type="text" name="test_answer" style="width:93%;">
 							</li>
 							<!-- カウントを1増やす親元のfor文に戻る。 -->
 							<% cnt++; %>

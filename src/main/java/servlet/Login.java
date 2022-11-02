@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Dao.UsersBean;
 import Dao.UsersDao;
@@ -63,6 +64,12 @@ public class Login extends HttpServlet {
 		//コンソールに結果表示		
 	    //System.out.println(login_id);
 	    //System.out.println(login_pw);
+		
+		//セッションの作成
+		HttpSession session = request.getSession();
+    	
+    	//ログイン情報をsessionに保存
+		session.setAttribute("Login_Id", login_id);
 	    
 		//・例外処理の為try-catch文を使用する。
 		//※理由: javaでは例外が発生しうる箇所で何かしらの対処をしないとコンパイルエラーになる。
@@ -107,6 +114,7 @@ public class Login extends HttpServlet {
 	    		//if文から抜け出て来たログイン情報をセットする。
 	    		request.setAttribute("loginMsg", loginMsg);
     		}
+	    	
 	    } catch (Exception e) {
 			e.printStackTrace();
 
