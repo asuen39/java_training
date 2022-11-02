@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import Dao.CorrectAnswersBean;
 import Dao.CorrectAnswersDao;
+import Dao.HistoriesDao;
 import Dao.UsersBean;
 import Dao.UsersDao;
 
@@ -144,6 +145,14 @@ public class Result extends HttpServlet {
 	    	
 	    	//リクエストに対してscoreにscoreを格納してセットする。
 	    	request.setAttribute("score", score);
+	    	
+	    	//点数とユーザーidを登録
+	    	//HistoriesDaoの型でdao_historiesを宣言
+	    	//newを使用してHistoriesDaoをインスタンス化させる。
+	    	HistoriesDao dao_histories = new HistoriesDao();
+	    	
+	    	//dao_histories.scoreResultsに引数login_id, scoreを設置して実行する。
+	    	dao_histories.scoreResults(login_id, score);
 	    	
 	    	//現在日時を取得
 	    	Date nowDate = new Date();
