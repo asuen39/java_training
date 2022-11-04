@@ -11,7 +11,7 @@ public class HistoriesBean {
  * コンストラクタ
  */
 	//コンストラクタとは？クラスの変数を初期化する。
-	//QuestionsBeanを定義する。newが実行された時に処理をする定義
+	//HistoriesBeanを定義する。newが実行された時に処理をする定義
 	//※他で使用出来るようにid, questionを設置する。thisで設置できる
 	//※thisとは自分自身を指す言葉。自分自身のインスタンスを明示的に指し示し、そのフィールドやメソッドを使う為の変数。
 	public HistoriesBean(int id, int user_id, int point, Timestamp created_at) {
@@ -35,25 +35,25 @@ public class HistoriesBean {
 	public void setId(int id) {
 		this.id = id;
 	}
-	//setIdでセットされたidを取得する。
-	//※returnセット後、this.idの指定
+	//setUserIdでセットされたuser_idを取得する。
+	//※returnセット後、this.user_idの指定
 	public int getUserId() {
 		return this.user_id;
 	}
-	//他から呼ばれたらidをセットする。
-	//※引数でint idをセット。
-	//※this.idにidをセットする。
+	//他から呼ばれたらuser_idをセットする。
+	//※引数でint user_idをセット。
+	//※this.user_idにuser_idをセットする。
 	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
-	//setQuestionでセットされたquestionを取得する。
-	//※returnセット後、this.questionの指定
+	//setPointでセットされたpointを取得する。
+	//※returnセット後、this.pointの指定
 	public int getPoint() {
 		return this.point;
 	}
-	//他から呼ばれたらquestionをセットする。
-	//※引数でstring questionをセット
-	//※this.questionにquestionをセット
+	//他から呼ばれたらpointをセットする。
+	//※引数でint pointをセット
+	//※this.pointにpointをセット
 	public void setPoint(int point) {
 		this.point = point;
 	}
