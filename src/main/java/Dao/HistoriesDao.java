@@ -25,7 +25,7 @@ public class HistoriesDao extends ConnectionDao {
 	  * @param int score
 	  * @throws(Exception)
 	 **/
-	public void scoreResults(String login_id, int score) throws Exception {
+	public void scoreResults(int login_id, int score) throws Exception {
 		
 		//データベースに繋がっているか判定をだす。
 		if (con == null) {
@@ -53,7 +53,7 @@ public class HistoriesDao extends ConnectionDao {
 			
 			//sql文内で1つ目の？にlogin_idを代入する。
 			//※setStringを使用する。
-			st.setString(1, login_id);
+			st.setInt(1, login_id);
 			
 			//sql文内で2つ目の？にscoreを代入する。
 			//※setIntを使用する。
@@ -105,7 +105,7 @@ public class HistoriesDao extends ConnectionDao {
 			//・変数sqlにsql文を格納する。
 			//1. historiesテーブルから全件取得する。
 			//2. レコードの取得フィールドはid、user_id、point
-			String sql = "SELECT id, user_id point FROM histories";
+			String sql = "SELECT id, user_id, point, created_at FROM histories ORDER BY created_at ASC";
 			
 			//stに情報を格納。
 			//1.con はデータベースの情報格納。

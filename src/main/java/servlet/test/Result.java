@@ -152,7 +152,7 @@ public class Result extends HttpServlet {
 	    	HistoriesDao dao_histories = new HistoriesDao();
 	    	
 	    	//dao_histories.scoreResultsに引数login_id, scoreを設置して実行する。
-	    	dao_histories.scoreResults(login_id, score);
+	    	dao_histories.scoreResults(Integer.parseInt(login_id), score);
 	    	
 	    	//現在日時を取得
 	    	Date nowDate = new Date();
