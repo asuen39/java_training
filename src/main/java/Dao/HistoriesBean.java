@@ -14,7 +14,7 @@ public class HistoriesBean {
 	//QuestionsBeanを定義する。newが実行された時に処理をする定義
 	//※他で使用出来るようにid, questionを設置する。thisで設置できる
 	//※thisとは自分自身を指す言葉。自分自身のインスタンスを明示的に指し示し、そのフィールドやメソッドを使う為の変数。
-	public HistoriesBean(int id, int user_id, int point) {
+	public HistoriesBean(int id, int user_id, int point, Timestamp created_at) {
 		this.id = id;
 		this.point = point;
 	}
