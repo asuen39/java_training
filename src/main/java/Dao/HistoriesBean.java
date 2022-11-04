@@ -16,7 +16,9 @@ public class HistoriesBean {
 	//※thisとは自分自身を指す言葉。自分自身のインスタンスを明示的に指し示し、そのフィールドやメソッドを使う為の変数。
 	public HistoriesBean(int id, int user_id, int point, Timestamp created_at) {
 		this.id = id;
+		this.user_id = user_id;
 		this.point = point;
+		this.created_at = created_at;
 	}
 	/** 引数無しのコンストラクタ **/
 	public HistoriesBean() {

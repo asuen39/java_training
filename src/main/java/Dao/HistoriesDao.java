@@ -135,10 +135,10 @@ public class HistoriesDao extends ConnectionDao {
 				//int pointにレコードのpointをセットする。
 				int point = rs.getInt("point");
 				
-				//int pointにレコードのpointをセットする。
+				//Timestamp created_atにレコードのcreated_atをセットする。
 				Timestamp created_at = rs.getTimestamp("created_at");
 				
-				//id, user_id, pointを格納した状態でインスタンス化する。
+				//id, user_id, point, created_atを格納した状態でインスタンス化する。
 				HistoriesBean bean = new HistoriesBean(id, user_id, point, created_at);
 				
 				//list配列にbeanを追加する。
