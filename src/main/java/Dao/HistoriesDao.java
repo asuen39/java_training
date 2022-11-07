@@ -87,7 +87,7 @@ public class HistoriesDao extends ConnectionDao {
 	 * histories テーブルを全件取得
 	 */
 	//findAllメソッドの戻り値の型はList<HistoriesBean>と定義する。
-	public List<HistoriesBean> findAll() throws Exception {
+	public List<HistoriesBean> findAll(int login_id) throws Exception {
 		
 		//データベースに繋がっているか判定をだす。
 		//※conで条件文を作成する。
@@ -106,12 +106,16 @@ public class HistoriesDao extends ConnectionDao {
 			//・変数sqlにsql文を格納する。
 			//1. historiesテーブルから全件取得する。
 			//2. レコードの取得フィールドはid、user_id、point
-			String sql = "SELECT id, user_id, point, created_at FROM histories ORDER BY created_at ASC";
+			String sql = "SELECT id, user_id, point, created_at FROM histories WHERE user_id = ? ORDER BY created_at ASC";
 			
 			//stに情報を格納。
 			//1.con はデータベースの情報格納。
 			//2. データベースに情報を送る為にprepareStatementにsql文を格納する。
 			st = con.prepareStatement(sql);
+			
+			//sql文内で1つ目の？にlogin_idを代入する。
+			//※setStringを使用する。
+			st.setInt(1, login_id);
 			
 			//sqlの実行。
 			//executeQueryで実行されたsql文の結果をrsに格納する。

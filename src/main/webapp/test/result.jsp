@@ -14,6 +14,7 @@
 </head>
 <body>
 <script type="text/javascript" src="../js/all.js"></script>
+<script type="text/javascript" src="../js/result.js"></script>
 
 <!-- ログインのリクエストデータの取得 -->
 <% UsersBean LoginUser = (UsersBean)request.getAttribute("loginUser"); %>
@@ -51,7 +52,7 @@
 				<!-- 日時の表示 -->
 				<p><%= FormatNowDate %></p>
 			</div>
-			<button type="submit">採点結果履歴へ</button>
+			<button type="button" onclick="History()">採点結果履歴へ</button>
 		</div>
 	</div>
 </body>
