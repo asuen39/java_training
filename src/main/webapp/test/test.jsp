@@ -24,9 +24,6 @@
 			</div>
 			<form action="./test/result" method="post" style="width:100%;">
 				<div class="main_area">
-					<!-- int cntを定義する。カウント用の変数を用意する。 -->
-					<!-- レコードに問題のid0が無いので1からセットする。 -->
-					<% int cnt = 1; %>
 					
 					<!-- 取得してきた問題一覧をfor文で一つずつ取り出す  -->
 					<%for(int i = 0; i < Questionslist.size(); i++){%>
@@ -34,8 +31,8 @@
 						<%QuestionsBean questionsBean = Questionslist.get(i);%>
 						<ul>
 							<li class="edit_area space_between">
-							<!-- ループでカウントした数を設置する。 -->
-								<%= cnt %>
+							<!-- iが通過時に1プラスで増やす。番号とする-->
+								<%= i + 1 %>
 								
 								<!-- 問題テキスト欄にquestionsBean.getQuestion()で文字列を設置する。 -->
 								<label class="label_textarea"><%=questionsBean.getQuestion()%></label>
@@ -46,8 +43,6 @@
 							<li class="edit_area space_between">回答
 								<input type="text" name="test_answer" style="width:93%;">
 							</li>
-							<!-- カウントを1増やす親元のfor文に戻る。 -->
-							<% cnt++; %>
 						</ul>
 					<% } %>
 				</div>
