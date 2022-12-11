@@ -129,10 +129,10 @@ public class Result extends HttpServlet {
 		    				count_answer = 0;
 		    			}
 		    		}
-		    		
-		    		//リクエストに対してcountAnswerにcount_answerを格納してセットする。
-		    		request.setAttribute("countAnswer", (int)count_answer);
 		    	}
+		    	
+		    	//リクエストに対してcountAnswerにcount_answerを格納してセットする。
+	    		request.setAttribute("countAnswer", (int)count_answer);
 		    	
 	    	}
 	    	
