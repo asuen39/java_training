@@ -53,7 +53,7 @@ public class Result extends HttpServlet {
 	    String login_id = "";
 	    
 	    //セッションの作成
-	    HttpSession session = request.getSession();
+	    HttpSession session = request.getSession(false);
 	    
 	    //login_idにsessionと引数Login_Idを格納。
 	    login_id = (String) session.getAttribute("Login_Id");
