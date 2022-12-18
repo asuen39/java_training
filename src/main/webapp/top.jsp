@@ -12,6 +12,7 @@
 <body>
 	<!-- JS読み込み -->
 	<script type="text/javascript" src="./js/top.js"></script>
+	
 	<div class="global_area">
 		<div class="top_area">
 			<button type="button" name="logout" class="auto-right logout_button" onclick="Logout()">logout</button>

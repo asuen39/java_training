@@ -48,7 +48,7 @@ public class List extends HttpServlet {
 			QuestionsDao dao = new QuestionsDao();
 			
 			//・dao.findAllを実行する。
-	    	//1.ArrayList<UsersBean>の型にlistをセットする。
+	    	//1.ArrayList<QuestionsBean>の型にlistをセットする。
 	    	//2.listにdao.findAllの結果を格納する。
 	    	ArrayList<QuestionsBean> list = (ArrayList<QuestionsBean>) dao.findAll();
 	    	
