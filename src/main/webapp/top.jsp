@@ -13,12 +13,6 @@
 	<!-- JS読み込み -->
 	<script type="text/javascript" src="./js/top.js"></script>
 	
-	<!-- エラー文章リクエスト -->
-	<% String ErrorLoginId = (String)request.getAttribute("error_LoginId"); %>
-	
-	<% if( ErrorLoginId != null ) { %>
-		<div style="color:red"><%= ErrorLoginId %></div>
-	<% } %>
 	<div class="global_area">
 		<div class="top_area">
 			<button type="button" name="logout" class="auto-right logout_button" onclick="Logout()">logout</button>

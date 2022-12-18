@@ -38,6 +38,17 @@ public class Login extends HttpServlet {
     // doGetとは？ サーバー側に繋げた時にデータの要求がある場合に呼び出す
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//loginIderrorの定義をする。Historyから取得したlogin_Id_errorを格納する。
+		String loginIderror = request.getParameter("login_Id_error");
+		
+		//loginIderrorの判定を行う。
+		if(loginIderror != null) {
+			//エラー文設定
+			String error_loginId = "ログインIDが取得出来ませんでした。";
+			//request.setAttributeを利用する。
+			request.setAttribute("error_LoginId", error_loginId);
+		}
+		
 		//システムのスタート地点
 		//login.jspを読み込む宣言をする。
 		// ※loginというページにアクセスされた時に実行される。

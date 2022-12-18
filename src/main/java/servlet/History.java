@@ -69,7 +69,7 @@ public class History extends HttpServlet {
 	    		String loginIderror = "login_Id_error";
 				
 	    		//login_idを取得出来ない場合、リダイレクトの設定をする。
-	    		response.sendRedirect("/java_training/top?" + loginIderror);
+	    		response.sendRedirect("/java_training/login?" + loginIderror);
 	    		
 	    		//結果を返しこの条件文での処理を止める。
 				return;

@@ -23,7 +23,14 @@
 	<% if (loginMsg != null) { %>
 		<!-- ログインメッセージ表示 -->
 		<%= loginMsg %>
-	<% } %> 
+	<% } %>
+	
+	<!-- エラー文章リクエスト -->
+	<% String ErrorLoginId = (String)request.getAttribute("error_LoginId"); %>
+	
+	<% if( ErrorLoginId != null ) { %>
+		<div style="color:red"><%= ErrorLoginId %></div>
+	<% } %>
 	
 	<!-- inputに入力された値はlogin.javaにpostで送られる。 idとpassが送られる -->
 	<form action="./login" method="post">
