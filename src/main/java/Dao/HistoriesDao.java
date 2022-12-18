@@ -61,7 +61,7 @@ public class HistoriesDao extends ConnectionDao {
 			st.setInt(2, score);
 			
 			//sqlの実行
-			//executeUpdateで実行される。
+			//executeUpdateで実行されたsql文の更新
 			st.executeUpdate();
 			
 		} catch (Exception e) {
