@@ -120,21 +120,12 @@ public class Result extends HttpServlet {
 		    			//入力画面とレコードの回答が合っていたらカウント変数に1増やす。
 		    			count_answer++;
 		    			
-		    		} else {
-		    			
-		    			//入力画面とレコードの回答が1つも合っていなかったら実行する。
-		    			if(count_answer == 0) {
-		    				
-		    				//count_answerに0をセットする。
-		    				count_answer = 0;
-		    			}
 		    		}
 		    	}
-		    	
-		    	//リクエストに対してcountAnswerにcount_answerを格納してセットする。
-	    		request.setAttribute("countAnswer", (int)count_answer);
-		    	
 	    	}
+	    	
+	    	//リクエストに対してcountAnswerにcount_answerを格納してセットする。
+    		request.setAttribute("countAnswer", (int)count_answer);
 	    	
 	    	//点数計算
 	    	//int型にscoreを定義する。

@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
 <body>
-<script type="text/javascript" src="../js/all.js"></script>
+<script type="text/javascript" src="./js/all.js"></script>
 
 <!-- ログインのリクエストデータの取得 -->
 <% UsersBean HistoriesLoginUser = (UsersBean)request.getAttribute("historiesLoginUser"); %>

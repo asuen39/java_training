@@ -106,7 +106,7 @@ public class HistoriesDao extends ConnectionDao {
 			//・変数sqlにsql文を格納する。
 			//1. historiesテーブルから全件取得する。
 			//2. レコードの取得フィールドはid、user_id、point
-			String sql = "SELECT id, user_id, point, created_at FROM histories WHERE user_id = ? ORDER BY created_at ASC";
+			String sql = "SELECT id, user_id, point, created_at FROM histories WHERE user_id = ? ORDER BY created_at";
 			
 			//stに情報を格納。
 			//1.con はデータベースの情報格納。
