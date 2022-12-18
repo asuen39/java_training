@@ -55,13 +55,25 @@ public class History extends HttpServlet {
 	    	//1.new UsersDaoを定義する事でインスタンス化している。
 	    	UsersDao daoUsers = new UsersDao();
 	    	
-	    	//dao.findを実行する。引数にはlogin_idをセットする。
-	    	//UsersBeanの型にloginUserをセットする。
-	    	//loginUserにdao.findの結果を格納する。
-	    	UsersBean loginUser = daoUsers.find(login_id);
-	    	
-	    	//リクエストに対してhistoriesLoginUserにloginUserを格納してセットする。
-	    	request.setAttribute("historiesLoginUser", loginUser);
+	    	//login_id取得の判定処理を設置する。
+	    	if( login_id != null ) {
+	    		//dao.findを実行する。引数にはlogin_idをセットする。
+		    	//UsersBeanの型にloginUserをセットする。
+		    	//loginUserにdao.findの結果を格納する。
+		    	UsersBean loginUser = daoUsers.find(login_id);
+		    	
+		    	//リクエストに対してhistoriesLoginUserにloginUserを格納してセットする。
+		    	request.setAttribute("historiesLoginUser", loginUser);
+		    	
+	    	} else {
+	    		String loginIderror = "login_Id_error";
+				
+	    		//login_idを取得出来ない場合、リダイレクトの設定をする。
+	    		response.sendRedirect("/java_training/top?" + loginIderror);
+	    		
+	    		//結果を返しこの条件文での処理を止める。
+				return;
+	    	}
 	    	
 	    	//回答履歴一覧取得
 	    	//1.HistoriesDaoの型でdaoを宣言。

@@ -29,6 +29,17 @@ public class Top extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//loginIderrorの定義をする。Historyから取得したlogin_Id_errorを格納する。
+		String loginIderror = request.getParameter("login_Id_error");
+		
+		//loginIderrorの判定を行う。
+		if(loginIderror != null) {
+			//エラー文設定
+			String error_loginId = "ログインIDが取得出来ませんでした。";
+			//request.setAttributeを利用する。
+			request.setAttribute("error_LoginId", error_loginId);
+		}
+		
 		/**
 		 * /top.jspをリクエスト
 		 * RequestDispatcherを型にdispatcherを定義する。
