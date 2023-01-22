@@ -111,7 +111,7 @@ public class UsersDao extends ConnectionDao {
 	//UsersBean findを宣言する。
 	//findメソッドの戻り値の型はUsersBeanと定義する。
 	//findにuser_idの引数をセットする。
-	public UsersBean find(int user_id) throws Exception {
+	public UsersBean find(String user_id) throws Exception {
 		//データベースに繋がっているかの判定をだす
 		if (con == null) {
 			setConnection();
@@ -133,7 +133,7 @@ public class UsersDao extends ConnectionDao {
 			st = con.prepareStatement(sql);
 			
 			//sql文内で1つ目の？にuser_idを代入する。
-			st.setInt(1, user_id);
+			st.setString(1, user_id);
 			
 			//sqlの実行
 			//executeQueryで実行されたsql文の結果をrsに格納する。
